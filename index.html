@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Naomi 🌹</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@400;700&family=Lato:wght@300;400&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --rose: #e8375a;
+      --deep: #1a0a14;
+      --blush: #f7c5d0;
+      --gold: #f0c040;
+      --parchment: #fdf6e3;
+      --ink: #3b1f2b;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--deep);
+      color: #fff;
+      font-family: 'Lato', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* ── PETAL CANVAS ── */
+    #petal-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      background: radial-gradient(ellipse at center, #3d0b1e 0%, #1a0a14 70%);
+    }
+
+    .hero-name {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(4rem, 14vw, 10rem);
+      color: var(--blush);
+      text-shadow:
+        0 0 20px rgba(232,55,90,0.8),
+        0 0 60px rgba(232,55,90,0.5),
+        0 0 120px rgba(232,55,90,0.3);
+      animation: glow-pulse 3s ease-in-out infinite;
+      line-height: 1;
+    }
+
+    @keyframes glow-pulse {
+      0%, 100% { text-shadow: 0 0 20px rgba(232,55,90,0.8), 0 0 60px rgba(232,55,90,0.5), 0 0 120px rgba(232,55,90,0.3); }
+      50%       { text-shadow: 0 0 40px rgba(232,55,90,1),   0 0 100px rgba(232,55,90,0.7), 0 0 180px rgba(232,55,90,0.5); }
+    }
+
+    .hero-nick {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1.2rem, 4vw, 2rem);
+      color: var(--gold);
+      margin-top: 0.5rem;
+      opacity: 0;
+      animation: fade-up 1s ease forwards 0.8s;
+    }
+
+    /* ── COUNTER ── */
+    #counter-wrap {
+      margin-top: 2.5rem;
+      opacity: 0;
+      animation: fade-up 1s ease forwards 1.4s;
+    }
+
+    .counter-label {
+      font-size: 0.85rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--blush);
+      margin-bottom: 0.8rem;
+    }
+
+    .counter-boxes {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .c-box {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(232,55,90,0.3);
+      border-radius: 12px;
+      padding: 0.8rem 1.2rem;
+      min-width: 76px;
+      text-align: center;
+      backdrop-filter: blur(6px);
+    }
+
+    .c-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: var(--rose);
+      line-height: 1;
+    }
+
+    .c-unit {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: var(--blush);
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+    }
+
+    .scroll-hint {
+      margin-top: 3rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.3);
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(8px); }
+    }
+
+    /* ── SHARED SECTION STYLES ── */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 5rem 1.5rem;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .section-heading {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      color: var(--blush);
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── LOVE LETTER ── */
+    #letter-section { max-width: 680px; }
+
+    .parchment {
+      background: var(--parchment);
+      color: var(--ink);
+      border-radius: 4px;
+      padding: 3rem 2.5rem;
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.1),
+        4px 8px 40px rgba(0,0,0,0.6),
+        inset 0 0 80px rgba(180,140,100,0.15);
+      position: relative;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      line-height: 1.9;
+    }
+
+    .parchment::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      border-radius: 4px;
+    }
+
+    .parchment-date {
+      font-style: italic;
+      font-size: 0.9rem;
+      color: #7a5c4a;
+      margin-bottom: 1.2rem;
+    }
+
+    .parchment-sign {
+      margin-top: 1.5rem;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.6rem;
+      color: var(--rose);
+    }
+
+    #typewriter-text::after {
+      content: '|';
+      animation: blink 0.7s step-start infinite;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* ── HEART & REASONS ── */
+    #reasons-section { text-align: center; }
+
+    #heart-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 6rem;
+      line-height: 1;
+      animation: heartbeat 1.4s ease-in-out infinite;
+      filter: drop-shadow(0 0 20px rgba(232,55,90,0.7));
+      transition: transform 0.2s;
+    }
+
+    #heart-btn:hover { transform: scale(1.15); }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      14%       { transform: scale(1.18); }
+      28%       { transform: scale(1); }
+      42%       { transform: scale(1.12); }
+      56%       { transform: scale(1); }
+    }
+
+    .heart-hint {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 0.8rem;
+      letter-spacing: 0.1em;
+    }
+
+    #reasons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    #reasons-grid.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reason-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(232,55,90,0.25);
+      border-radius: 14px;
+      padding: 1.2rem 1rem;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--blush);
+      opacity: 0;
+      transform: scale(0.85);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      backdrop-filter: blur(4px);
+    }
+
+    .reason-card.pop {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .reason-num {
+      display: block;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.5rem;
+      color: var(--rose);
+      margin-bottom: 0.3rem;
+      font-style: normal;
+    }
+
+    /* ── TIMELINE ── */
+    #timeline-section { max-width: 640px; }
+
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 9px;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--rose), transparent);
+    }
+
+    .tl-item {
+      position: relative;
+      margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .tl-item.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .tl-dot {
+      position: absolute;
+      left: -2rem;
+      top: 0.25rem;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: var(--rose);
+      box-shadow: 0 0 10px rgba(232,55,90,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.55rem;
+    }
+
+    .tl-date {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .tl-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--blush);
+      line-height: 1.6;
+    }
+
+    /* ── CLOSING ── */
+    #closing {
+      text-align: center;
+      padding-bottom: 8rem;
+    }
+
+    .closing-heart {
+      font-size: 5rem;
+      display: inline-block;
+      animation: closing-beat 1s ease-in-out infinite;
+      filter: drop-shadow(0 0 24px rgba(232,55,90,0.9));
+    }
+
+    @keyframes closing-beat {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.2); }
+    }
+
+    .closing-msg {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.6rem, 5vw, 2.6rem);
+      color: var(--blush);
+      margin-top: 1.2rem;
+      line-height: 1.5;
+    }
+
+    .closing-sub {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── CONFETTI ── */
+    .confetti-piece {
+      position: fixed;
+      top: -10px;
+      width: 10px; height: 10px;
+      border-radius: 2px;
+      pointer-events: none;
+      z-index: 9999;
+      animation: confetti-fall linear forwards;
+    }
+
+    @keyframes confetti-fall {
+      0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* ── UTILITIES ── */
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Falling petals canvas -->
+<canvas id="petal-canvas"></canvas>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section id="hero">
+  <div class="hero-name">Naomi</div>
+  <div class="hero-nick">My Lil Indomie 🍜</div>
+
+  <div id="counter-wrap">
+    <div class="counter-label">Together since April 3, 2026 &nbsp;·&nbsp; already been</div>
+    <div class="counter-boxes">
+      <div class="c-box"><div class="c-num" id="c-days">0</div><div class="c-unit">Days</div></div>
+      <div class="c-box"><div class="c-num" id="c-hours">0</div><div class="c-unit">Hours</div></div>
+      <div class="c-box"><div class="c-num" id="c-mins">0</div><div class="c-unit">Mins</div></div>
+      <div class="c-box"><div class="c-num" id="c-secs">0</div><div class="c-unit">Secs</div></div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">▼ &nbsp; scroll down &nbsp; ▼</div>
+</section>
+
+<!-- ═══════════ LOVE LETTER ═══════════ -->
+<section id="letter-section">
+  <div class="section-heading">A Letter For You</div>
+  <div class="parchment">
+    <div class="parchment-date">April 2026 &nbsp;·&nbsp; Written just for Nayo</div>
+    <p id="typewriter-text"></p>
+    <div class="parchment-sign" id="letter-sign" style="opacity:0">— Yours, always 🌹</div>
+  </div>
+</section>
+
+<!-- ═══════════ 12 REASONS ═══════════ -->
+<section id="reasons-section">
+  <div class="section-heading">12 Reasons I Love You</div>
+  <button id="heart-btn" title="Click me!">❤️</button>
+  <div class="heart-hint">tap the heart</div>
+  <div id="reasons-grid"></div>
+</section>
+
+<!-- ═══════════ TIMELINE ═══════════ -->
+<section id="timeline-section">
+  <div class="section-heading">Our First 10 Days</div>
+  <div class="timeline" id="timeline"></div>
+</section>
+
+<!-- ═══════════ CLOSING ═══════════ -->
+<section id="closing">
+  <span class="closing-heart">💗</span>
+  <div class="closing-msg">
+    You are my favourite person,<br>
+    my calm, my chaos, my everything.<br>
+    <span style="color:var(--gold)">I choose you — today, tomorrow, always.</span>
+  </div>
+  <div class="closing-sub">Made with every bit of love I have · Just for Naomi</div>
+</section>
+
+<script>
+/* ══════════════════════════════════════
+   FALLING ROSE PETALS
+══════════════════════════════════════ */
+(function () {
+  const canvas = document.getElementById('petal-canvas');
+  const ctx    = canvas.getContext('2d');
+  let W, H;
+  const PETAL_COUNT = 38;
+  const petals = [];
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  function rnd(a, b) { return a + Math.random() * (b - a); }
+
+  // Build a petal path
+  function drawPetal(ctx, x, y, size, angle, alpha) {
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.translate(x, y);
+    ctx.rotate(angle);
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.bezierCurveTo( size*0.6,  -size*0.3,  size*1.2, size*0.2,  size*0.5, size*0.9);
+    ctx.bezierCurveTo( size*0.2,  size*1.2,  -size*0.3, size*0.8,  0, 0);
+    const hue = rnd(340, 360);
+    ctx.fillStyle = `hsl(${hue},80%,${rnd(60,80)}%)`;
+    ctx.fill();
+    ctx.restore();
+  }
+
+  for (let i = 0; i < PETAL_COUNT; i++) {
+    petals.push({
+      x:     rnd(0, window.innerWidth),
+      y:     rnd(-200, window.innerHeight),
+      size:  rnd(10, 22),
+      speed: rnd(0.8, 2.2),
+      drift: rnd(-0.5, 0.5),
+      angle: rnd(0, Math.PI * 2),
+      spin:  rnd(-0.02, 0.02),
+      alpha: rnd(0.5, 0.95),
+      sway:  rnd(0.003, 0.008),
+      swayT: rnd(0, Math.PI * 2),
+    });
+  }
+
+  function tick() {
+    ctx.clearRect(0, 0, W, H);
+    for (const p of petals) {
+      p.y     += p.speed;
+      p.swayT += p.sway;
+      p.x     += p.drift + Math.sin(p.swayT) * 0.8;
+      p.angle += p.spin;
+      if (p.y > H + 30) {
+        p.y = -30;
+        p.x = rnd(0, W);
+      }
+      drawPetal(ctx, p.x, p.y, p.size, p.angle, p.alpha);
+    }
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+
+/* ══════════════════════════════════════
+   LIVE COUNTER
+══════════════════════════════════════ */
+(function () {
+  // April 3 2026 midnight local time — adjust if needed
+  const START = new Date('2026-04-03T00:00:00');
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function update() {
+    const diff = Math.max(0, Date.now() - START.getTime());
+    const totalSecs = Math.floor(diff / 1000);
+    const secs  = totalSecs % 60;
+    const mins  = Math.floor(totalSecs / 60) % 60;
+    const hours = Math.floor(totalSecs / 3600) % 24;
+    const days  = Math.floor(totalSecs / 86400);
+    document.getElementById('c-days').textContent  = days;
+    document.getElementById('c-hours').textContent = pad(hours);
+    document.getElementById('c-mins').textContent  = pad(mins);
+    document.getElementById('c-secs').textContent  = pad(secs);
+  }
+  update();
+  setInterval(update, 1000);
+})();
+
+/* ══════════════════════════════════════
+   TYPEWRITER LETTER
+══════════════════════════════════════ */
+(function () {
+  const letter = `My dearest Naomi,
+
+I don't know exactly when it happened — somewhere between your laugh and the way you say my name — but I fell, completely and without warning.
+
+You make ordinary moments feel like scenes I never want to leave. The way you tease me, the way you care without making a fuss of it, the way your eyes give away everything your words try to hide — I notice all of it. Every single detail.
+
+You are not just a chapter in my story. You are the reason I want to keep writing.
+
+I am not a perfect person, but I promise you this: with you, I will always choose to show up. To be present. To love you louder on the days it matters and quietly on the ones that don't.
+
+My Lil Indomie — you are warm, comforting, perfectly made, and somehow exactly what I needed.
+
+Thank you for being mine.`;
+
+  const el   = document.getElementById('typewriter-text');
+  const sign = document.getElementById('letter-sign');
+  let   i    = 0;
+  let   started = false;
+
+  const observer = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting && !started) {
+      started = true;
+      observer.disconnect();
+      type();
+    }
+  }, { threshold: 0.3 });
+
+  observer.observe(document.getElementById('letter-section'));
+
+  function type() {
+    if (i < letter.length) {
+      const ch = letter[i++];
+      if (ch === '\n') {
+        el.innerHTML += '<br>';
+      } else {
+        el.innerHTML += ch;
+      }
+      setTimeout(type, ch === '.' || ch === '!' || ch === '?' ? 60 : ch === ',' ? 45 : 28);
+    } else {
+      // Remove cursor blink after done
+      el.style.cssText += '; --no-cursor: 1';
+      el.style.setProperty('--after-display','none');
+      // Actually just remove the ::after via class
+      el.classList.add('done');
+      sign.style.cssText = 'opacity:1; transition: opacity 1s ease 0.5s;';
+      setTimeout(() => sign.style.opacity = '1', 100);
+    }
+  }
+
+  // Hide cursor when done
+  const style = document.createElement('style');
+  style.textContent = '#typewriter-text.done::after { display: none; }';
+  document.head.appendChild(style);
+})();
+
+/* ══════════════════════════════════════
+   12 REASONS + CONFETTI
+══════════════════════════════════════ */
+(function () {
+  const reasons = [
+    "Your laugh is contagious — it fills every room.",
+    "You care so deeply, even when you pretend you don't.",
+    "The way your eyes light up when you're excited.",
+    "You challenge me to be better without even trying.",
+    "Your warmth — you make everyone feel seen.",
+    "The way you tease me and still make me feel loved.",
+    "Your resilience — you carry hard things with grace.",
+    "Late night conversations with you feel like home.",
+    "The little things you do that you think go unnoticed.",
+    "Your honesty — you say what you mean and mean what you say.",
+    "The way you say my name. There's nothing like it.",
+    "Simply because you are Naomi — and that is more than enough.",
+  ];
+
+  const grid = document.getElementById('reasons-grid');
+  const btn  = document.getElementById('heart-btn');
+  let opened = false;
+
+  reasons.forEach((r, idx) => {
+    const card = document.createElement('div');
+    card.className = 'reason-card';
+    card.innerHTML = `<span class="reason-num">${idx + 1}.</span>${r}`;
+    grid.appendChild(card);
+  });
+
+  btn.addEventListener('click', () => {
+    if (opened) return;
+    opened = true;
+    grid.classList.add('visible');
+
+    const cards = grid.querySelectorAll('.reason-card');
+    cards.forEach((c, i) => {
+      setTimeout(() => c.classList.add('pop'), i * 130);
+    });
+
+    // Confetti after last card
+    setTimeout(() => launchConfetti(), cards.length * 130 + 200);
+  });
+
+  function launchConfetti() {
+    const colors = ['#e8375a','#f0c040','#f7c5d0','#fff','#ff8fab','#c77dff'];
+    for (let i = 0; i < 120; i++) {
+      const el = document.createElement('div');
+      el.className = 'confetti-piece';
+      el.style.cssText = `
+        left: ${Math.random()*100}vw;
+        width: ${6+Math.random()*8}px;
+        height: ${6+Math.random()*8}px;
+        background: ${colors[Math.floor(Math.random()*colors.length)]};
+        border-radius: ${Math.random()>0.5?'50%':'2px'};
+        animation-duration: ${1.5+Math.random()*2}s;
+        animation-delay: ${Math.random()*0.8}s;
+      `;
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 4000);
+    }
+  }
+})();
+
+/* ══════════════════════════════════════
+   TIMELINE
+══════════════════════════════════════ */
+(function () {
+  const days = [
+    { date: "April 3",  text: "Day 1 — The beginning. Something shifted and neither of us could explain it." },
+    { date: "April 4",  text: "Day 2 — You texted first. I smiled for an hour." },
+    { date: "April 5",  text: "Day 3 — Our first real conversation — the one that went on way too long and felt way too short." },
+    { date: "April 6",  text: "Day 4 — I started looking forward to hearing from you." },
+    { date: "April 7",  text: "Day 5 — You teased me and I realised I was completely done for." },
+    { date: "April 8",  text: "Day 6 — I found myself thinking about you in the middle of unrelated things." },
+    { date: "April 9",  text: "Day 7 — One week. It felt longer — in the best possible way." },
+    { date: "April 10", text: "Day 8 — I started planning ways to make you smile." },
+    { date: "April 11", text: "Day 9 — You said something small and it stuck with me all day." },
+    { date: "April 12", text: "Day 10 — Ten days and I already knew — you are someone I want to keep choosing." },
+  ];
+
+  const container = document.getElementById('timeline');
+
+  days.forEach((d, i) => {
+    const item = document.createElement('div');
+    item.className = 'tl-item';
+    item.innerHTML = `
+      <div class="tl-dot">🌹</div>
+      <div class="tl-date">${d.date}</div>
+      <div class="tl-text">${d.text}</div>
+    `;
+    container.appendChild(item);
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.2 });
+
+  container.querySelectorAll('.tl-item').forEach(el => observer.observe(el));
+})();
+</script>
+</body>
+</html>
